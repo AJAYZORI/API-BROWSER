@@ -1,0 +1,105 @@
+:root {
+  --bg: #f4f4f4;
+  --text: #222;
+  --accent: #007bff;
+  --input-bg: #fff;
+  --border: #ccc;
+}
+
+body.dark {
+  --bg: #1e1e1e;
+  --text: #eee;
+  --accent: #ff6f00;
+  --input-bg: #2d2d2d;
+  --border: #555;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--input-bg);
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 1rem;
+}
+
+main.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.panel {
+  background-color: var(--input-bg);
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  overflow-y: auto;
+}
+
+form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  background-color: var(--input-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.response-box {
+  background-color: var(--input-bg);
+  border: 1px solid var(--border);
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 4px;
+  white-space: pre-wrap;
+}
+
+.response-box.error {
+  background-color: #5c1e1e;
+  color: #ffcccc;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  background-color: var(--input-bg);
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}

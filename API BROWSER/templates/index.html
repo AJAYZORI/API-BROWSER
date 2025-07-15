@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Flask API Tester</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header>
+    <div class="header-left">API Tester</div>
+    <div class="header-right">
+      <button id="theme-toggle" title="Toggle theme">🌙</button>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="panel">
+      <h2>Send API Request</h2>
+      <form method="POST">
+        <input type="hidden" name="form_type" value="api_request">
+        <label>URL</label>
+        <input type="text" name="url" value="{{ url }}" required>
+
+        <label>Method</label>
+        <select name="method">
+          <option value="GET" {% if method == 'GET' %}selected{% endif %}>GET</option>
+          <option value="POST" {% if method == 'POST' %}selected{% endif %}>POST</option>
+          <option value="PUT" {% if method == 'PUT' %}selected{% endif %}>PUT</option>
+          <option value="DELETE" {% if method == 'DELETE' %}selected{% endif %}>DELETE</option>
+        </select>
+
+        <label>Headers</label>
+        <textarea name="headers">{{ headers }}</textarea>
+
+        <label>Body</label>
+        <textarea name="body">{{ body }}</textarea>
+
+        <button type="submit">Send Request</button>
+      </form>
+
+      <h2>Generate Access Token</h2>
+      <form method="POST">
+        <input type="hidden" name="form_type" value="token_request">
+        <label>Token URL</label>
+        <input type="text" name="token_url" value="{{ token_url }}">
+
+        <label>Client ID</label>
+        <input type="text" name="client_id" value="{{ client_id }}">
+
+        <label>Client Secret</label>
+        <input type="text" name="client_secret" value="{{ client_secret }}">
+
+        <button type="submit">Generate Token</button>
+      </form>
+
+      {% if access_token %}
+        <div class="response-box"><strong>Access Token:</strong><br>{{ access_token }}</div>
+      {% endif %}
+
+      <h2>History</h2>
+      <ul>
+        {% for item in history %}
+          <li>{{ item.method }} → {{ item.url }} [{{ item.status }}]</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="panel">
+      {% if result %}
+        <h2>Response</h2>
+        {% if result.error %}
+          <div class="response-box error">Error: {{ result.error }}</div>
+        {% else %}
+          <div class="response-box"><strong>Status Code:</strong> {{ result.status_code }}</div>
+          <div class="response-box"><strong>Headers:</strong><br>{{ result.headers }}</div>
+          <div class="response-box"><strong>Body:</strong><br>{{ result.body }}</div>
+        {% endif %}
+      {% endif %}
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='theme.js') }}"></script>
+</body>
+</html>
